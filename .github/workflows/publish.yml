@@ -4,14 +4,17 @@ on:
   push:
     tags: ['v*']
 
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
-  contents: read
+  contents: write
   id-token: write
 
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment: npm
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
@@ -22,9 +25,14 @@ jobs:
       # Trusted publishing (OIDC) needs npm >= 11.5.1; provenance is attached automatically.
       - run: npm install -g npm@latest
       - run: npm ci
-      - run: npm run check
-      - run: |
-          TAG="${GITHUB_REF_NAME#v}"
-          PKG="$(node -p "require('./package.json').version")"
-          test "$TAG" = "$PKG" || { echo "tag v$TAG does not match package.json version $PKG"; exit 1; }
+
+      # The tag is the source of truth; package.json in the repo is never bumped.
+      - name: Set version from tag
+        run: npm version "${GITHUB_REF_NAME#v}" --no-git-tag-version
+
+      # prepublishOnly runs `npm run check` (typecheck, lint, test, build).
       - run: npm publish
+
+      - uses: softprops/action-gh-release@efb35369e0ad2afab669f228072c1b0d510eae64 # v3.0.3
+        with:
+          generate_release_notes: true
