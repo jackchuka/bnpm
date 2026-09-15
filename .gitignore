@@ -1,0 +1,14 @@
+node_modules/
+dist/
+*.tgz
+*.log
+.DS_Store
+coverage/
+.idea/
+.claude/
+docs/superpowers/
+
+# stray package-manager state, never part of the repo
+pnpm/
+.npmrc
+.pnpmrc

@@ -1,0 +1,21 @@
+{
+  "name": "proj",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "vitest": "^5.0.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.0"
+  },
+  "peerDependencies": {
+    "typescript": ">=5"
+  }
+}
