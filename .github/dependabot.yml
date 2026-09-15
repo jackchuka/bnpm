@@ -16,6 +16,11 @@ updates:
     groups:
       npm:
         patterns: ['*']
+    # ink pins chalk ^5, so taking chalk 6 installs a second copy for every user.
+    # Drop this once ink widens its range.
+    ignore:
+      - dependency-name: 'chalk'
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: 'github-actions'
     directory: '/'
