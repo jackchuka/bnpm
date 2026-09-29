@@ -6,7 +6,7 @@ Thanks for taking a look. Issues and pull requests are both welcome.
 
 ```sh
 npm ci
-npm run check               # typecheck, lint, test, build
+npm run check               # typecheck, lint, fmt:check, test, build
 ```
 
 Needs Node 22.22 or newer on the 22 line, or 24.15 or newer. `npm run dev -- <args>` builds and runs bnpm with those arguments, so `npm run dev -- run` exercises the script picker.
