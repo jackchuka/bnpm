@@ -176,7 +176,7 @@ bnpm walks `PATH` for an `npm` or `pnpm` whose real path is not bnpm itself, so 
 npm ci
 npm run dev -- run          # build, then run bnpm with the given args
 npm test
-npm run check               # typecheck, lint, test, build
+npm run check               # typecheck, lint, fmt:check, test, build
 ```
 
 TypeScript 7, bundled with tsdown, tested with vitest. Prompts are rendered on `@clack/core`; the `mine` screen is Ink. Both draw from one palette in `src/ui/colors.ts`, the same one `assets/generate.mjs` builds the README artwork from. Releases publish from GitHub Actions with npm trusted publishing and provenance.

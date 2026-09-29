@@ -26,9 +26,14 @@ jobs:
           node-version: ${{ matrix.node }}
           cache: npm
       - run: npm ci
-      - run: npm run typecheck
-      - run: npm run lint
-      - run: npm test
+      - name: Lint
+        run: npm run lint
+      - name: Format check
+        run: npm run fmt:check
+      - name: Typecheck
+        run: npm run typecheck
+      - name: Test
+        run: npm test
       - run: npm run build
       - run: node dist/cli.js --bnpm-version
       - run: npm pack --dry-run
